@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define MAX 100000
+using namespace std;
+ll prime[MAX];
+vector<int> primes;
+void seive()
+{
+   bool composite[MAX];
+   memset(composite, false, sizeof(composite));
+   for(int i=2;i*i<= MAX; i++)
+   { if(composite[i]== false)
+      for(int j = 2 ; j*i<=MAX; j++)
+        composite[i*j] = true; 
+	   }
+	   
+	   for(int i = 2; i<=MAX ; i++)
+	    { if(composite[i] == false)
+	    primes.push_back(i);
+			}	
+}
+int lcm(int n)
+{
+	int res = 1;
+	for(int i=0; i < primes.size() && primes[i]<=n ; i++)
+	{
+		int xx= primes[i];
+//		cout<<xx<<"\n";
+		while(xx * primes[i] <=n)
+	     xx*=primes[i];
+	     
+	     res*= xx;
+	     res%=1000000007;
+	}
+	return res;
+}
+int main()
+{
+	seive();
+	ios_base::sync_with_stdio(false); 
+	cin.tie(0); cout.tie(0);
+	int n;
+	cin>>n;
+	cout<<lcm(n);
+	
+}
