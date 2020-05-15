@@ -1,0 +1,188 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+typedef pair< int,int > ii;
+typedef vector< ii > vii;
+
+#define sfd(x) scanf("%d",&x)
+#define sfs(x) scanf("%s",x)
+#define sff(x) scanf("%lf",&x)
+#define mod 1000000007
+#define MAX 1000000
+#define pb push_back
+#define mp make_pair
+#define fr first 
+#define sc second
+#define testcases scanf("%d",&t);while(t--)
+#define ffor(a,b,c) for(a=b;a<c;a++)
+#define rfor(a,b,c) for(a=b;a>=c;a--)
+
+int parent[100005]; // for keeping immediate parent of a node
+int P[100005][18]; // for keeping 2^j th parent of a node
+int maxi[100005][18]; // for maximum length from node to its 2^j th parent
+int mini[100005][18]; // for minimum length from node to its 2^j th parent
+int level[100005]; // for assigning levels to the node taking 1 as the root always
+int root=1;
+bool visited[100005]={0}; 
+vector< pair<int,int> > graph[100005];
+
+void setLevels(int node, int l,int dist)
+{
+    level[node]=l;
+    visited[node]=1;
+    if(dist != -1)
+    {
+        maxi[node][0] = mini[node][0] = dist; 
+    }
+    for(int i=0;i<graph[node].size();i++)
+    {
+        if(!visited[graph[node][i].fr])
+        {
+            parent[graph[node][i].fr] = node; // setting parent of a node
+            setLevels(graph[node][i].fr, l+1, graph[node][i].sc);
+        }
+    }
+}
+
+int lca(int p, int q)
+{
+    int tmp,lg,i;
+
+    if(level[p] < level[q]) // if p is above in level then p is swapped with q
+        tmp=p, p=q, q=tmp;
+
+    for(lg=1; (1<<lg) <= level[p]; lg++);
+    lg--;
+
+    for(i=lg;i>=0;i--) //bringing p and q to the same levels 
+    {
+        if(level[p] - (1<<i) >= level[q])
+        {
+            p=P[p][i];
+        }
+    }
+
+    if(p == q)
+        return p;
+
+    for(i=lg;i>=0;i--) // finding lca of p and q by jumping both p and q
+    {
+        if(P[p][i] != -1 && P[p][i] != P[q][i])
+            p=P[p][i], q=P[q][i];
+    }
+
+    return parent[p];
+}
+
+ii cal(int a,int b) //function to calculate the pair of maximum and minimum from a to its 2^j th parent b using a log(n) loop 
+{
+    ii pp;
+    int lg,i;
+    pp.fr=INT_MIN;
+    pp.sc=INT_MAX;
+
+    for(lg=1; (1<<lg) <= level[a]; lg++);
+    lg--;
+
+    for(i=lg;i>=0;i--)
+    {
+        if(level[a] - (1<<i) >= level[b])
+        {
+            pp.fr = max(pp.fr, maxi[a][i]);
+            pp.sc = min(pp.sc, mini[a][i]);
+            a=P[a][i];
+        }
+    }
+
+    return pp;
+}
+
+int main()
+{
+    int i,j,t;
+    int n;
+    int u,v,w;
+
+    {
+        scanf("%d",&n);
+
+        for(i=1;i<=n;i++)
+        {
+            graph[i].clear();
+            visited[i]=0;
+        }
+
+        for(i=0;i<n-1;i++)
+        {
+            scanf("%d%d%d",&u,&v,&w);
+            graph[u].pb(mp(v,w));
+            graph[v].pb(mp(u,w));
+        }
+        root=1;
+        parent[1]=-1;
+
+        for(i=1;i<=n;i++)
+        {
+            for(j=0;j<18;j++)
+            {
+                P[i][j]=-1;
+                maxi[i][j] = INT_MIN;
+                mini[i][j] = INT_MAX;
+            }
+        }
+
+        setLevels(root,0,-1);
+
+        for(i=1;i<=n;i++)
+        {
+            P[i][0]=parent[i];
+        }
+
+        for(j=1;(1<<j)<=n;j++) // dynamic programming loop to assign values of 2^j th parent and maximum and minimum length upto them
+        {
+            for(i=1;i<=n;i++)
+            {
+                if(P[i][j-1] != -1)
+                {
+                    P[i][j] = P[P[i][j-1]][j-1];
+                    maxi[i][j] = max( maxi[i][j-1], maxi[P[i][j-1]][j-1]);
+                    mini[i][j] = min( mini[i][j-1], mini[P[i][j-1]][j-1]);
+                }
+            }
+        }
+
+        int a,b,k;
+        ii pp;
+        ii qq;
+        sfd(k);
+        while(k--)
+        {
+            scanf("%d%d",&a,&b);
+            int lc=lca(a,b); //finding lca of a,b
+
+            if(lc == a)
+            {
+                pp=cal(b,lc);
+
+                printf("%d %d\n", pp.sc, pp.fr);
+            }
+            else if(lc == b)
+            {
+                pp=cal(a,lc);
+                printf("%d %d\n", pp.sc, pp.fr);
+            }
+            else
+            {
+                pp=cal(a,lc);
+                qq=cal(b,lc);
+                pp.fr= max(pp.fr, qq.fr);
+                pp.sc= min(pp.sc, qq.sc);
+                printf("%d %d\n", pp.sc, pp.fr);
+            }
+            
+        }
+    }
+    return 0;
+}
