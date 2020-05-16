@@ -1,0 +1,8 @@
+// from i to j maximum any sum where res = |A[i]- A[j]| + |i-j|
+
+int maxArr(vector<int> &A) {
+    vector<int> B(A.size()),D(A.size());
+for(int i=0;i<A.size();i++)
+{B[i]=A[i]+i;D[i]=A[i]-i;}
+return max(*max_element(D.begin(),D.end())-*min_element(D.begin(),D.end()),*max_element(B.begin(),B.end())-*min_element(B.begin(),B.end()));
+}
