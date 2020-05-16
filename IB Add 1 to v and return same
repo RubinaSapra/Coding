@@ -1,0 +1,27 @@
+vector<int> Solution::plusOne(vector<int> &A) {
+ int carry = 0;
+for(int i = A.size()-1; i >= 0; i--)
+{
+if(A[i] == 9)
+{
+A[i] = 0;
+carry = 1;
+continue;
+}
+if(carry = 1)
+{
+A[i]++;
+carry = 0;
+break;
+}
+A[i]++;
+break;
+}
+if(carry == 1) A.insert(A.begin(),1);
+while(A.front() == 0)
+{
+A.erase(A.begin());
+}
+return A;
+    
+}
