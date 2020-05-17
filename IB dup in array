@@ -1,11 +1,14 @@
 int Solution::repeatedNumber(const vector<int> &A) {
-    int res=-1;
-    map<int, int> mp;
-    for(int i=0;i<A.size();i++)
-    {
-        mp[A[i]]++;
-        if(mp[A[i]] >1)
-        return A[i];
-    }
-    return res;
+vector<int> B=A;
+sort(B.begin(),B.end());
+
+for(int i=0;i<B.size();){
+    
+    if(B[i]==B[i+1])
+    return B[i];    
+    else
+    i++;
+}
+
+return -1;
 }
