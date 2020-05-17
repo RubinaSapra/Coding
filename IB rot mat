@@ -1,0 +1,9 @@
+void Solution::rotate(vector<vector<int> > &A) {
+    vector<vector<int> > temp(A);
+        for(int i=0; i<A.size(); i++){
+            for(int j=0; j<A[0].size(); j++){
+               A[i][j] = temp[A.size()-j-1][i];
+            }
+        }
+    
+}
