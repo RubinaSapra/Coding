@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+ unordered_map < int, int> mp;
+    int c;
+    list<int> q;
+
+LRUCache::LRUCache(int capacity) {
+ c = capacity; 
+ mp.clear(); // only if clear content is mentioned
+ q.clear(); // only if clear content is mentioned
+}
+
+int LRUCache::get(int key) {
+     if(mp.find(key) == mp.end())
+           return -1;
+      q.remove(key);
+        q.push_back(key);
+        return mp[key];
+
+}
+
+void LRUCache::set(int key, int value) {
+    if(mp.find(key)!= mp.end())
+         {
+          q.remove(key); mp.erase(key);
+         }
+        if(q.size()==c)
+            {   int cur=q.front();
+        q.pop_front();
+        mp.erase(cur);
+    }
+    mp[key]=value;
+    q.push_back(key);
+
+}
