@@ -1,0 +1,12 @@
+int Solution::isPower(int n) {
+   for(int i=1;i<=sqrt(n);i++)
+   {
+       for(int j=2;j<=31;j++)
+       {
+           int res= pow(i,j);
+           if(res==n)
+           return 1;
+       }
+   }
+   return 0;
+}
