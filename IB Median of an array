@@ -1,0 +1,34 @@
+double Solution::findMedianSortedArrays(const vector<int> &A, const vector<int> &B) {
+
+  int x= A.size(); 
+  int y= B.size();
+  if(x>y)
+    return findMedianSortedArrays(B,A);
+    int start = 0 , end = x;
+    while(start<=end)
+    {
+        int px = start + (end-start)/2;
+        int py = (x+y+1)/2 - px;
+        
+        int minx = (px==0) ? INT_MIN : A[px-1];
+        int maxx = (px==x) ? INT_MAX : A[px];
+        
+        int miny = (py==0) ?INT_MIN : B[py-1];
+        int maxy = (py==y) ?INT_MAX : B[py];
+        
+        if(minx<=maxy && miny<=maxx)
+        {
+            if((x+y)%2 == 0)
+            return ((double)(max(minx,miny) + min(maxx,maxy)))/2;
+            else
+            return (double)max(minx,miny);
+        }
+        else if(minx>maxy)
+        end= px-1;
+        else
+        start = px+1;
+    }
+    return -1;
+ 
+}
+ 
