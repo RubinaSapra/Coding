@@ -1,0 +1,31 @@
+int Solution::search(const vector<int> &A, int B) {
+    int l=0 , r= A.size()-1;
+    while(l<=r)
+    {
+        int m = (l+r)/2, cl=A[l], cr=A[r],cm=A[m];
+        if(B == cm)
+        return m;
+        if(cm<cl)
+        {
+            if(B<=cr && B>cm)
+            l=m+1;
+            else
+            r=m-1;
+        }
+        else if(cm>cr)
+        {
+            if(B>=cl && B<cm)
+            r=m-1;
+            else
+            l=m+1;
+        }
+        else
+        {
+           if(B>cm)
+           l=m+1;
+           else
+           r=m-1;
+        }
+    }
+    return -1;
+}
