@@ -1,36 +1,29 @@
-int x[4]={-1,0,0,1};
-int y[4]={0,-1,1,0};
-bool inrange(int i,int j,int m,int n)
+int x[4] = {-1,0,0,1};
+int y[4] = {0,-1,1,0};
+bool dfs(vector<string>&A, string B , int i, int j)
 {
-if(i<0 || j<0 || i>=m || j>=n) return false;
-return true;
-}
- bool dfs(int i,int j,vector<string>&A,string B)
-{
-if(B.size()==0) return true;
-if(A[i][j]!=B[0]) return false;
-//B = B.substr(1);
-for(int p=0;p<4;p++)
-{
-    if(inrange(i+x[p],j+y[p],A.size(),A[0].size()))
-      {
-          bool b = dfs(i+x[p],j+y[p],A,B.substr(1));
-          if(b) return true;
-      }
-}
-return false;
- }
-int Solution::exist(vector<string> &A, string B) {
-for(int i=0;i<A.size();i++)
-{
-    for(int j=0;j<A[0].size();j++)
+    if(B.size()==0) return true;
+    if(A[i][j]!=B[0]) return false;
+    for(int k=0;k<4;k++)
     {
-        if(A[i][j]==B[0])
+        int x2= i+x[k]; int y2=j+y[k];
+       if(x2>=0 && x2<A.size() && y2>=0 && y2<A[0].size())
+       {
+           bool b = dfs(A,B.substr(1),x2,y2);
+           if(b) return true;
+       }
+    }
+    return false;
+}
+int Solution::exist(vector<string> &A, string B) {
+    for(int i=0;i<A.size();i++)
+    {
+        for(int j=0;j<A[0].size();j++)
         {
-            bool b = dfs(i,j,A,B);
-            if(b) return true;
+            if(A[i][j] == B[0])
+               {bool res= dfs(A,B,i,j);
+               if(res) return true;}
         }
     }
-}
-return false;
+    return false;
 }
