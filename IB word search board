@@ -1,0 +1,36 @@
+int x[4]={-1,0,0,1};
+int y[4]={0,-1,1,0};
+bool inrange(int i,int j,int m,int n)
+{
+if(i<0 || j<0 || i>=m || j>=n) return false;
+return true;
+}
+ bool dfs(int i,int j,vector<string>&A,string B)
+{
+if(B.size()==0) return true;
+if(A[i][j]!=B[0]) return false;
+//B = B.substr(1);
+for(int p=0;p<4;p++)
+{
+    if(inrange(i+x[p],j+y[p],A.size(),A[0].size()))
+      {
+          bool b = dfs(i+x[p],j+y[p],A,B.substr(1));
+          if(b) return true;
+      }
+}
+return false;
+ }
+int Solution::exist(vector<string> &A, string B) {
+for(int i=0;i<A.size();i++)
+{
+    for(int j=0;j<A[0].size();j++)
+    {
+        if(A[i][j]==B[0])
+        {
+            bool b = dfs(i,j,A,B);
+            if(b) return true;
+        }
+    }
+}
+return false;
+}
