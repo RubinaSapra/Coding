@@ -1,0 +1,49 @@
+int Solution::strStr(const string A, const string B) {
+string haystack=A;
+string needle=B;
+int n=needle.size();
+int m=haystack.size();
+if(n==0 || m==0 || n>m) return -1;
+int lps[n];
+lps[0]=0;
+int i=1;
+int len=0;
+while(i<n)                       
+{
+    if(needle[len]==needle[i])
+    {
+        len++;
+        lps[i]=len;
+        i++;
+    }
+    else
+    {
+        if(len!=0)
+        len  = lps[len-1];
+        else
+        lps[i++]=0;
+    }
+}
+i=0;
+int j=0,idx=0,flag=0;
+while(i<m)                      //checking for needle in haystack
+{
+
+    if(haystack[i]==needle[j])
+    {
+        i++;
+        j++;
+    }
+    else 
+    {
+        if(j!=0)
+        j=lps[j-1];
+        else
+        i++;
+    }
+
+    if(j==n)
+      return i-j;
+}
+return -1;
+}
