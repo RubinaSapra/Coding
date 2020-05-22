@@ -1,0 +1,11 @@
+int Solution::maxProduct(const vector<int> &nums) {
+   vector<int>maxp(nums.size()); 
+   vector<int>minp(nums.size());
+   maxp[0] = minp[0] = nums[0];
+   for(int i=1; i<nums.size() ; i++)
+   {
+       maxp[i] = max( maxp[i-1]*nums[i] ,max( minp[i-1]*nums[i] , nums[i]));
+       minp[i] = min ( maxp[i-1]*nums[i] ,min( minp[i-1]*nums[i] , nums[i]));
+   }
+   return *max_element(maxp.begin(), maxp.end());
+}
