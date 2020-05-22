@@ -1,0 +1,14 @@
+class Solution {
+public:
+    using VI = vector<int>;
+    int kthSmallest(TreeNode* root, int K, int ans = -1e9) {
+        go(root, K, ans);
+        return ans;
+    }
+private:
+    void go(TreeNode* root, int& K, int& ans) {
+        if (K && root->left) go(root->left, K, ans);
+        if (!--K) ans = root->val; // K-th largest 
+        if (K && root->right) go(root->right, K, ans);
+    }
+};
