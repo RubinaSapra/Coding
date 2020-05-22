@@ -1,0 +1,13 @@
+int Solution::numDecodings(string A) {
+if(A[0]=='0') return 0;
+int a=1,b=1;
+for(int i=0;i<A.size();i++)
+{
+    int t=0;
+    if(A[i] > '0') t=b;
+    if(A[i-1]=='1' || (A[i-1]=='2' && A[i]<='6')) t+=a;
+    a=b;
+    b=t;
+}
+return b;
+}
