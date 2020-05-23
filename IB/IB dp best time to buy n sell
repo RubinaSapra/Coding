@@ -1,0 +1,14 @@
+int Solution::maxProfit(const vector<int> &A) {
+    if(A.size()<=1)
+    return 0;
+int buy=0,sell=1;
+
+int profit=0;
+for(int sell=1;sell<A.size();sell++)
+{
+    if(A[buy]<A[sell])
+        profit=max(profit,A[sell]-A[buy]);
+    else
+        buy=sell;}
+return profit;
+}
