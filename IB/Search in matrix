@@ -1,0 +1,10 @@
+int n=A.size();
+int m=A[0].size();
+int i=0,j=m-1;
+while(i<n&&j>=0)
+{
+if(A[i][j]==B) return 1;
+if(A[i][j]<B) i++;
+else j–;
+}
+return 0;
