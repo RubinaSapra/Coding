@@ -1,0 +1,20 @@
+long arrayManipulation(int n, vector<vector<int>> queries) {
+    int a[n];
+    long res=0,tmp=0;
+    memset(a,0,sizeof(a));
+ for(int i=0;i<queries.size(); i++)
+ {
+     int x=queries[i][0];
+     int y=queries[i][1];
+     int z=queries[i][2];
+     a[x]+=z;
+     if(y+1<=n) a[y+1]-=z; 
+ }
+ for(int i=0;i<n;i++)
+ {
+     tmp+=a[i];
+     res= max(res, tmp);
+ }
+ return res;
+
+}
