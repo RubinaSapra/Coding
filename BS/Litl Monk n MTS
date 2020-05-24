@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+#define ll int64_t
+using namespace std;
+int main(){
+    ll m,q,d,x,t;
+    cin>>m>>q;
+    vector<ll>z;
+    ll a[m],b[m];
+    for(ll i=0;i<m;i++)
+    {
+        cin>>a[i]>>b[i];
+       z.push_back(b[i]-a[i]+1);
+       if(i!=0)
+       z[i]+=z[i-1];
+      // cout<<z[i]<<" "<<a[i]<<" "<<b[i]<<endl;
+    }
+    for(ll i=0;i<q;i++)
+    {
+        cin>>d;
+      ll p = lower_bound(z.begin(),z.end(),d)-z.begin();
+   if(p==0)
+     x=a[p]+d-1;
+     else
+     {
+       t= (d-z[p-1]);
+       x=a[p]+t-1;
+     }
+     // cout<<a[p]<<" "<<b[p]<<" "<<z[p]<<" "<<d<<" "<<x<<"\n";
+     cout<<x<<endl;
+    }
+    
+}
