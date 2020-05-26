@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int countSubstrings(string s) {
+     int c= s.length();
+        for(int i=0;i<s.length() ; i++)
+        {
+            int l = i-1;
+            int r= i+1;
+            while(l>=0 && r<s.length())
+            {
+                if(s[l] == s[r])
+                {
+                    c++; l--; r++;
+                }
+                else
+                    break;
+            }
+            if( i< s.length()-1 && s[i] == s[i+1])
+            {
+                c++;
+                l = i-1;
+                r= i+2;
+                while(l>=0 && r<s.length())
+            {
+                if(s[l] == s[r])
+                {
+                    c++; l--; r++;
+                }
+                else
+                    break;
+            }
+            }
+        }
+        return c;
+    }
+};
