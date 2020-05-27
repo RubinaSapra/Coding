@@ -1,0 +1,35 @@
+vector<int> Solution::subUnsort(vector<int> &v) {
+int i , j , maxi , mini = INT_MAX, mine = INT_MAX, maxe=  v[0], l = -1, r= -1;
+vector<int>res;
+for(int i=1 ; i<v.size() ; i++)
+{
+    maxe= max(maxe, v[i]);
+    if(maxe!=v[i])
+    {
+        r= i;
+        if(v[i]<mine)
+        {
+            mini = i;
+            mine =v[i];
+        }
+    }
+}
+if(r== - 1)
+{
+    res.push_back(-1);
+    return res;
+}
+j =mini-1; 
+while(j>=0 && v[j] > v[mini])
+    j--;
+ l = j+1;
+    if(l==-1 && r==-1)
+    {
+      res.push_back(-1);
+    return res;  
+    }
+
+res.push_back(l);
+res.push_back(r);
+return res;
+}
