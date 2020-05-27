@@ -1,0 +1,24 @@
+int Solution::maxSpecialProduct(vector<int> &A) {
+    long long int maxL,maxR,prod,res=0,j,m;
+    if(A.size()<2){
+    return 0;
+}
+for(j=A.size()-2;j>A.size()/2;j--){
+    maxL=0;maxR=0;
+    for( m=j+1;m<A.size();m++){
+      if(A[m]>A[j]){
+          maxR = m;
+          break;
+      }  
+    }
+     for(m=j-1;m>=0;m--){
+      if(A[m]>A[j]){
+          maxL = m;
+          break;
+      }  
+    }
+    res=  max(res, maxL*maxR);
+    
+}
+return res%1000000007;
+}
