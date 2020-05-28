@@ -1,0 +1,16 @@
+vector<vector<int> > Solution::diagonal(vector<vector<int> > &A) {
+    int s=A.size();
+int n=s*2-1;
+vector<vector <int> > vec(n);
+int r=0,c=0;
+for(int k=0;k<n;k++){
+
+    for(int i=r,j=c;i<=c,j>=r;i++,j--)
+            vec[k].push_back(A[i][j]);
+    if(c<s-1)
+        c++;
+    else
+        r++;
+}
+return vec;
+}
