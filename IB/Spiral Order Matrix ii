@@ -1,0 +1,25 @@
+vector<vector<int> > Solution::generateMatrix(int A) {
+    vector< vector< int > > res(A,vector<int>(A,12));
+    int top = 0 , down = A, right = A, left = 0,c =1;
+    while(top<down && left<right)
+    {
+        for(int i=left ; i<right ; i++)
+        res[top][i]=c++;
+        top++;
+        for(int i= top ; i< down; i++)
+        res[i][right-1]= c++;
+        right--;
+        if(top<down){
+            for(int i = right-1; i>=left ; i--)
+            res[down-1][i]=c++;
+            down--;
+        }
+        if(left < right){
+            for(int i = down-1; i>=top ; i--)
+            res[i][left] = c++;
+            left++;
+        }
+        
+    }
+    return res;
+}
