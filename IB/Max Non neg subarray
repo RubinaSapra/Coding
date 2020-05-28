@@ -1,0 +1,25 @@
+vector<int> Solution::maxset(vector<int> &A) {
+    long long int a1 = 0 , a2=0, b1 =0, b2=0, sm= 0 , mxsum = 0;
+    for(int i=0;i<A.size() ;i++)
+    {
+        if(A[i]<0){
+            sm = 0; 
+            a1= i+1;
+            b1=0;
+        }
+        else{
+            b1++;
+            sm+=A[i];
+            if(sm>mxsum || (sm==mxsum && b1>b2))
+            {
+                mxsum = sm;
+                a2=a1;
+                b2=b1;
+            }
+        }
+    }
+    vector<int> res;
+    for(int i=a2; i<a2+b2; i++)
+    res.push_back(A[i]);
+    return res;
+}
