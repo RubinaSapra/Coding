@@ -1,0 +1,19 @@
+int maximalSquare(vector<vector<char>>& matrix) {
+        if(matrix.size()==0)
+            return 0;
+        int r = matrix.size();    
+        int c= matrix[0].size();
+         int dp[r][c];
+          int a=0;
+        for(int i=0;i<r;i++)
+        {
+            for(int j=0;j<c;j++)
+            {
+              dp[i][j]= matrix[i][j]-'0';
+                if(i && j && matrix[i][j]=='1')
+                dp[i][j] = 1 + min(dp[i-1][j-1] , min(dp[i][j-1], dp[i-1][j]));
+                a=max(a,dp[i][j]);
+            }
+        }
+        return a*a;
+    }
