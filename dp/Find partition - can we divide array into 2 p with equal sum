@@ -1,0 +1,16 @@
+bool findPartition(int nums[], int n) {
+    int total=0;
+        for(int i=0;i<n; i++) total+=nums[i];
+        if(total&1) return false;             //if the sum of all elements is odd the return false;
+        total/=2;                             //else you have to find a subset which equals (total sum of all elements)/2;
+        bool dp[n+1][total+1];
+        for(int i=0 ; i<=total ; i++) dp[0][i]=false;
+        for(int i=0 ; i<=n ; i++) dp[i][0]=true;
+        for(int i=1 ; i<=n ; i++)
+            for(int j=1 ; j<=total ; j++)
+            {
+                if(nums[i-1]>j) dp[i][j]=dp[i-1][j];
+                else dp[i][j]=(dp[i-1][j] or dp[i-1][j-nums[i-1]]);
+            }
+        return dp[n][total];
+}
