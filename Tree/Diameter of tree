@@ -1,0 +1,12 @@
+ int a=0;
+    int dfs(TreeNode* root)
+    {
+        if(root == NULL ) return 0;
+        int l = root->left==NULL ? 0 : dfs(root->left)+1;
+        int r= root->right==NULL ? 0 : dfs(root->right)+1;
+        a = max(a, l+r);
+       return max(l,r);
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+    dfs(root);
+    return a;}
