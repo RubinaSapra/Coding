@@ -1,0 +1,6 @@
+  vector<int> grayCode(int n) {  //ltcode
+         int i, m = 1<<n;
+        vector<int>a(m);        
+        for(i=0;i<m;i++){ a[i] = i ^ (i>>1); }
+        return a;
+    }
