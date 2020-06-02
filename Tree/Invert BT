@@ -1,0 +1,4 @@
+ TreeNode* invertTree(TreeNode* root) {
+         TreeNode* temp;
+        return root ? (temp = invertTree(root->left), root->left = invertTree(root->right), root->right = temp, root) : root;
+    }
