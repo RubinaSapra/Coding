@@ -1,0 +1,34 @@
+string largestNumber(int n, int sum){
+    // Your code here
+    if(sum==0 && n>0)
+    {
+        string res="";
+        for(int i=0;i<n;i++)
+        res+="0";
+        return res;
+    }
+    if(9*n<sum)
+    return "-1";
+    else
+    {
+        string res="";
+        for(int i=0; i<n;i++)
+        {
+            if(sum>=9)
+            {
+                sum-=9;
+                res+=to_string(9);
+            }
+            else if(sum<9)
+            {
+                res+=to_string(sum);
+                 sum=0;
+            }
+            else if(sum==0)
+            res+=to_string(0);
+        }
+        return res;
+    }
+    return "-1";
+    
+}
