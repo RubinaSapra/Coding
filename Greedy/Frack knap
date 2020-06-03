@@ -1,0 +1,27 @@
+bool cmp(struct Item a,struct Item b)
+{
+   double x = (double) a.value/a.weight   ;
+   double y=  (double) b.value/b.weight  ;
+   return x > y;
+}
+double fractionalKnapsack(int W, Item arr[], int n)
+{
+sort(arr,arr+n,cmp);
+double cv=0.0;
+int cw=0;
+for(int i=0;i<n;i++)
+{
+  if(arr[i].weight + cw <=W)
+  {
+      cw+=arr[i].weight;
+      cv+=arr[i].value;
+  }
+  else
+  {
+      int rem = W-cw;
+      cv+= arr[i].value*((double) rem /arr[i].weight);
+      break;
+  }
+}
+return cv;
+}
