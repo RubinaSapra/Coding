@@ -1,0 +1,49 @@
+//first method
+
+int areMirror(Node* a, Node* b)
+{
+   if(!a && !b)
+        return 1;
+   if(!a || !b || a->data != b->data )
+      return 0;
+    return ((a->data == b->data) && areMirror(a->left,b->right) && areMirror(a->right,b->left));
+    
+}
+
+//sec 
+int areMirror(Node* a, Node* b) {
+    //Your code here
+    if(!a && !b) return 1;
+    if( (!a && b) || (!b && a)) return 0;
+    queue<Node*> q , q2;
+    vector< vector < int > > x,y;
+    q.push(a); 
+    q2.push(b);
+    while(!q.empty() && !q2.empty()){
+        int qs = q.size();
+        vector<int> l,l2 ;
+        for(int i=0;i<qs ; i++)
+        {
+              Node* curr = q.front();
+              q.pop();
+            //   cout<<curr->data<<" ";
+              l.push_back(curr->data);
+              if(curr->left ) q.push(curr->left);
+              if(curr->right) q.push(curr->right);
+                Node* curr2 = q2.front();
+              q2.pop();
+              l2.push_back(curr2->data);
+              if(curr2->left ) q2.push(curr2->left);
+              if(curr2->right) q2.push(curr2->right);
+        }
+      for(int j=0; j<l.size(); j++)
+      {
+          if(l[j]!=l2[l.size() - j- 1])
+          return 0;
+      }
+    }
+     
+    
+      return 1;
+   
+}
