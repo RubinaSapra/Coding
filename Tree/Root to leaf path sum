@@ -1,0 +1,7 @@
+bool hasPathSum(Node *root, int sum) {
+    // Your code here
+    if(!root)return false;                                         //Terminating Condition
+    sum=sum-root->data;                                             //Body
+    if(sum==0&&!root->left&&!root->right)return true;              //body
+    return hasPathSum(root->left,sum)||hasPathSum(root->right,sum);//Propagation
+}
