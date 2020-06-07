@@ -1,0 +1,18 @@
+int sum(Node* root)
+{
+    if(!root) return 0;
+    return sum(root->left) + root->data+ sum(root->right);
+}
+bool isSumTree(Node* root)
+{
+     // Your code here
+     int ls, rs;
+     if(!root || (!root->left && !root->right) )
+     return true;
+     ls = sum(root->left);
+      rs = sum(root->right);
+     if( root->data == ls+rs && isSumTree(root->left) && isSumTree(root->right))
+     return true;
+     return false;
+    
+}
