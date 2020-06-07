@@ -1,0 +1,25 @@
+void printSibling(Node* root)
+{
+   // Your code here
+   queue<Node*> q;
+   q.push(root);
+  vector<int>v;
+   while(!q.empty())
+   {
+       Node* curr = q.front();
+       if(curr->left && !curr->right)
+       v.push_back(curr->left->data);
+       if(curr->right&& !curr->left)
+       v.push_back(curr->right->data);
+       if(curr->left ) q.push(curr->left);
+       if(curr->right) q.push(curr->right);
+        q.pop();
+       
+   }
+   sort(v.begin(), v.end() );
+        for(auto it: v)
+       cout<<it<<" ";
+   if(v.size() == 0 )
+   cout<<"-1";
+   
+}
