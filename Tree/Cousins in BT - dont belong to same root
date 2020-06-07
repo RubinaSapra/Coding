@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int lx,px,ly,py;
+    void check(TreeNode* root, int x, int y, int l, int p)
+    {
+        if(root->val == x)
+        {
+            lx=l ;
+            px=p;
+        }
+        if(root->val==y)
+        {
+            ly = l;
+            py = p;
+        }
+        if(root->left ) check(root->left, x,y,l+1,root->val);
+        if(root->right)  check(root->right,x,y,l+1,root->val);
+    } 
+    bool isCousins(TreeNode* root, int x, int y) {
+     check(root,x,y,0,0);  
+        return (px!=py && lx==ly );
+    }
+};
