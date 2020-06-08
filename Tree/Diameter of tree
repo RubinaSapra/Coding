@@ -1,4 +1,4 @@
- int a=0;
+ int a=0;  //leetcode
     int dfs(TreeNode* root)
     {
         if(root == NULL ) return 0;
@@ -10,3 +10,20 @@
     int diameterOfBinaryTree(TreeNode* root) {
     dfs(root);
     return a;}
+    
+    
+int dfs(Node* root , int &a) //gfg
+{
+    if(root == NULL ) return 0;
+        int l = dfs(root->left,a);
+        int r= dfs(root->right,a);
+        a = max(a, 1+l+r);
+       return 1+max(l,r);
+} 
+int diameter(Node* root) {
+    int a=INT_MIN;
+     dfs(root,a);
+    return a;
+    // Your code here
+}
+
