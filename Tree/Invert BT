@@ -1,4 +1,20 @@
- TreeNode* invertTree(TreeNode* root) {
+ TreeNode* invertTree(TreeNode* root) { //First method - lt
          TreeNode* temp;
         return root ? (temp = invertTree(root->left), root->left = invertTree(root->right), root->right = temp, root) : root;
     }
+    
+    //Sec meth:
+    Node* invert(Node* root)
+{
+    Node* temp;
+    root = root ? (temp =invert(root->left), root->left = invert (root->right), root->right = temp, root) : root;
+    return root;
+    
+}
+void mirror(Node* root) 
+{
+     // Your Code Here
+   root = invert(root);
+     
+     
+}
