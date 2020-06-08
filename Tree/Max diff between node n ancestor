@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int res= INT_MIN;
+    void findD(TreeNode* root, int mind,int maxd)
+    {
+        res= max(res, maxd-mind);
+        if(!root) return;
+        findD(root->left , min(root->val , mind) , max(root->val , maxd)) ;
+        findD(root->right , min(root->val , mind) , max(root->val , maxd ) ) ;
+    }
+    int maxAncestorDiff(TreeNode* root) {
+     findD(root, root->val, root->val);
+        return res;
+    }
+};
