@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> i(TreeNode* root, vector<int>&v)
+    {
+        if(!root) return v;
+        i(root->left,v);
+        v.push_back(root->val);
+        i(root->right,v);
+        return v;
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int>v;
+        i(root , v);
+        return v;
+    }
+};
