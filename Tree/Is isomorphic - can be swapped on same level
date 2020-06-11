@@ -1,0 +1,14 @@
+//Two trees are called isomorphic if one of them can be obtained from other by a series of flips,
+//i.e. by swapping left and right children of a number of nodes. Any number of nodes at any level can have their children swapped. 
+//Two empty trees are isomorphic.
+bool isIsomorphic(Node *a,Node *b)
+{
+//add code here.
+   if(!a && !b)
+        return 1;
+   if(!a || !b || a->data != b->data )
+      return 0;
+    return (isIsomorphic(a->left,b->left) && isIsomorphic(b->right,b->right))|| 
+ (isIsomorphic(a->left,b->right) && isIsomorphic(a->right,b->left)); 
+
+}
