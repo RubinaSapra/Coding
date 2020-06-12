@@ -1,0 +1,31 @@
+long getMaxArea(long long  heights [], int len ){
+    stack<int>s;
+        long ans=0,i;
+        for(i=0;i<len;i++){
+            while(!s.empty() && heights[s.top()]>heights[i]){
+               long area;
+                int last=s.top();
+                s.pop();
+                if(s.empty())
+                    area=heights[last]*i;
+                else
+                    area=heights[last]*(i-s.top()-1);
+                ans=max(ans,area);
+            }
+            s.push(i);
+        }
+            while(!s.empty()){
+               long area;
+                int last=s.top();
+                s.pop();
+                if(s.empty())
+                    area=heights[last]*i;
+                else
+                    area=heights[last]*(i-s.top()-1);
+                ans=max(ans,area);
+                
+            }
+        return ans;
+        
+    
+}
