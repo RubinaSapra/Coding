@@ -1,0 +1,19 @@
+void nextLargerElement(long long nums[], int N){
+    // Your code here
+     vector<long long > result(N,-1);
+        stack<long long> s;
+        
+        for(int i=0; i<N; i++) 
+        {
+            while(!s.empty() && nums[s.top()] < nums[i]) 
+            {
+                result[s.top()] = nums[i];
+                s.pop();
+            }
+            
+            s.push(i);
+        }
+        
+       for(int i=0; i<result.size(); i++)
+       cout<<result[i]<<" ";
+}
