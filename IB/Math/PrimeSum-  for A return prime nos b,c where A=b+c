@@ -1,0 +1,10 @@
+bool f(int n){
+    for(int i=2;i<=sqrt(n);i++)
+        if((n%i)==0)return 0;
+    return 1;
+}
+vector<int> Solution::primesum(int A) {
+    for(int i=2;i<A;i++)
+        if(f(i) and f(A-i))
+return{i,A-i};
+}
