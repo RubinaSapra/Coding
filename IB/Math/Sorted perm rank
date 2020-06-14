@@ -1,0 +1,19 @@
+int Solution::findRank(string A) {
+    int n = A.size();
+    int m= n;
+    int res=0;
+    int cnt;
+    int mod=1000003;
+    for(int i=0;i<n;i++)
+    {
+        cnt=0;
+        for(int j=i+1;j<n;j++)
+        {
+            if(A[i]>A[j]) cnt++;
+        }
+        res = ((res*1ll*m)%mod + cnt)%mod;
+        m--;
+    }
+    res++;
+    return res;
+}
