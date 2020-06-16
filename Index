@@ -5,3 +5,4 @@ You have to paint all N boards [C0, C1, C2, C3 … CN-1]. There are A painters a
 Calculate and return minimum time required to paint all boards under the constraints that any painter will only paint contiguous sections of board.
 
 2. Matrix Median - IB/BS
+3. Count occurance in sorted arr - IB/BS
