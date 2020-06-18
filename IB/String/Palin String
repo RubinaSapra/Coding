@@ -1,0 +1,20 @@
+int Solution::isPalindrome(string A) {
+    string tmp="";
+    int l = A.length();
+    for(int i=0; i<l; i++)
+    {
+        if(A[i]>='a' && A[i]<='z')
+        tmp+=A[i];
+        else if(A[i]>='A' && A[i]<='Z')
+        tmp+=A[i]-'A'+'a';
+        else if(A[i]>='0' && A[i]<='9')
+        tmp+=A[i];
+    }
+   // cout<<tmp;
+    for(int i=0;i<=tmp.size() /2;i++)
+    {
+        if(tmp[i]!=tmp[tmp.size()-i-1])
+        return 0;
+    }
+    return 1;
+}
