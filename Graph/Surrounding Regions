@@ -1,0 +1,30 @@
+class Solution {
+public:
+     void DFS(vector<vector<char>>& board, int i, int j, int m, int n) {
+        if(i<0 or j<0 or i>=m or j>=n or board[i][j] != 'O') return;
+        board[i][j] = 'P';
+        DFS(board, i-1, j, m, n);
+        DFS(board, i+1, j, m, n);
+        DFS(board, i, j-1, m, n);
+        DFS(board, i, j+1, m, n);
+    }
+        void solve(vector<vector<char>>& board) {
+          if(board.size()==0)return;
+        int row = board.size(),col = board[0].size();
+     
+        for(int i=0;i<col;i++){
+            DFS(board,0,i,row,col);//for FIRST ROW
+            DFS(board,row-1,i,row,col);//for LAST ROW
+        }
+        for(int i=0;i<row;i++){
+            DFS(board,i,0,row,col);//for FIRST COLUMN
+            DFS(board,i,col-1,row,col);//for LAST COLUMN
+        }
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                if(board[i][j]=='O')board[i][j]='X';
+                else if(board[i][j]=='P')board[i][j]='O';
+            }
+        }
+    }
+};
