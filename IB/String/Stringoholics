@@ -1,3 +1,10 @@
+//ou are given an array A consisting of strings made up of the letters ‘a’ and ‘b’ only.
+Each string goes through a number of operations, where:
+Once a string becomes equal to itself, it’s letters start to rotate from the first letter again (process resets). So, if a string takes t time to get back to the original, at time t+1 one letter will be rotated and the string will be it’s original self at 2t time.
+You have to find the minimum time, where maximum number of strings are equal to their original self.
+As this time can be very large, give the answer modulo 109+7.
+
+
 int Solution::solve(vector<string> &A) {
     long long n=A.size();
 vector<int> v(n);
