@@ -1,0 +1,38 @@
+ int val(char a){
+        if(a=='M') return 1000;
+        if(a=='D') return 500;
+        if(a=='C') return 100;
+        if(a=='L') return 50;
+        if(a=='X') return 10;
+        if(a=='V') return 5;
+            return 1;
+    }
+
+int Solution::romanToInt(string s) {
+   int n=0;
+        bool b = false;
+        for(int i = 0; i<s.size()-1;i++)
+        {
+            lbl:
+            if(val(s[i])<val(s[i+1]))
+            {
+             n=n+val(s[i+1]) - val(s[i]);
+             if(i==s.size()-2)
+             {
+                 b = true;
+                 break;
+             }
+             i+=2;
+             if(i==s.size()-1)
+                 break;
+            goto lbl;
+            }
+            else
+                n+=val(s[i]);
+        }
+        if(!b)
+        {
+            n+=val(s[s.size()-1]);
+        }
+        return n;
+    }
