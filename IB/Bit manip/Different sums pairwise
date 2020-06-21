@@ -1,0 +1,30 @@
+#define MOD 1000000007
+int Solution::cntBits(vector <int> &a) {
+long int one[32];
+long int zero[32];
+memset(one,0,sizeof(one));
+memset(zero,0,sizeof(zero));
+for(int i=0;i<a.size();i++)
+{
+for(int j=0;j<32;j++)
+{
+if(a[i]%2==0)
+{
+zero[j]++;
+a[i]=a[i]/2;
+}
+else
+{
+one[j]++;
+a[i]=a[i]/2;
+}
+}
+}
+long long int ans=0;
+for(int i=0;i<32;i++)
+{
+ans+=(one[i]*zero[i]);
+}
+return (2*(ans%MOD))%MOD;
+
+}
