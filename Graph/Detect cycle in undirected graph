@@ -1,0 +1,27 @@
+bool iscyc(vector<int> g[] , vector< int> &vis , int i , int p )
+{
+    vis[i] =1;
+    for(auto it : g[i])
+    {
+        if(!vis[it]){
+            if( iscyc( g, vis, it, i ))
+            return true;
+        }
+        else if(it!= p)
+        return true;
+    }
+    return false;
+}
+bool isCyclic(vector<int> g[], int V)
+{
+   // Your code here
+   vector<int> vis(V , 0 );
+   for(int i=0; i<V ; i++ )
+   {
+       if(!vis[i]){
+       if(iscyc( g, vis, i, -1 ))
+       return true;
+       }
+   }
+   return false;
+}
