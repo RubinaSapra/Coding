@@ -1,0 +1,11 @@
+int Solution::removeDuplicates(vector<int> &A) {
+  for(int i=0; i<A.size() ; i++ )
+  {
+int j=i+2;
+while(A[j]==A[i]&&j<A.size())
+j++;
+if(j-i>=3)
+A.erase(A.begin()+i+2,A.begin()+j);
+  }
+  return A.size();
+}
