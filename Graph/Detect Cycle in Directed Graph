@@ -1,0 +1,26 @@
+bool iscyc( vector<int> adj[] , vector<int> &vis, int i )
+{
+    if(vis[i] ==1 )
+    return true;
+    if(vis[i] == 0) {
+    vis[i] = 1; 
+    for(auto it : adj[i]){
+        if(iscyc(adj, vis, it))
+        return true;
+    }
+    }
+    vis[i] = 2; 
+    return false;
+    
+}
+bool isCyclic(int V, vector<int> adj[])
+{
+    // Your code here
+    vector< int> vis(V , 0 );
+    for(int i=0; i<V; i++)
+    {
+        if(iscyc(adj, vis, i))
+        return true;
+    }
+    return false;
+}
