@@ -1,0 +1,26 @@
+int Solution::solve(vector<int> &A, vector<int> &B, vector<int> &C) 
+   { int a=0,b=0,c=0, x= A.size() , y= B.size() , z=C.size();
+    int mn,mx,res=INT_MAX;
+    while(a<x && b<y && c<z)
+    {
+        mn = min({A[a], B[b], C[c]});
+        mx = max({A[a], B[b], C[c]});
+        res =  min( res, abs(mn-mx));
+        if(mn == A[a])
+        {
+            if(a<x)
+            a++;
+        }
+        if(mn == B[b])
+        {
+            if(b<y)
+            b++;
+        }
+        if(mn==C[c])
+        {
+            if(c<z)
+            c++;
+        }
+    }
+    return res;
+}
