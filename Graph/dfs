@@ -1,0 +1,25 @@
+vector<int> res;
+void dfsu(int i,vector<int> g[],vector<bool> &v )
+{
+  v[i]=true;
+     res.push_back(i);
+  for(auto it = g[i].begin() ; it!=g[i].end() ; it++)
+  {
+      if(v[*it]==false)
+      {
+          //cout<< *it<<" here ";
+          dfsu(*it, g, v);
+      }
+  }
+}
+vector <int> dfs(vector<int> g[], int N)
+{
+    
+    // Your code here
+    res.clear();
+  vector< bool> v(N, false ); 
+
+        dfsu(0,g , v);
+    return res;
+
+}
