@@ -1,0 +1,23 @@
+void tops(vector<int> adj[] , int i , vector<bool> &vis, vector<int> &res)
+{
+    vis[i] = true;
+    for(auto it: adj[i])
+    {
+        if(!vis[it])
+         tops(adj , it , vis , res);
+        
+    }
+    res.push_back(i);
+}
+vector<int> topoSort(int V, vector<int> adj[]) {
+    // Your code here
+    vector<int>res;
+    vector< bool> vis(V , false);
+    for(int i=0; i<V ; i++)
+    {
+      if(!vis[i])
+      tops(adj , i , vis , res);
+    }
+    reverse(res.begin() , res.end() ) ;
+    return res;
+}
