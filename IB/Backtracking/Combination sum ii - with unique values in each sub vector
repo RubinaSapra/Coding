@@ -1,0 +1,27 @@
+void gen(vector< int>&A, int B , vector<vector<int> > &res, vector<int>&sub , int c,int sum)
+{
+    if(sum>B)
+    return;
+    if(sum==B && find(res.begin() , res.end() , sub)==res.end())
+    {
+        res.push_back(sub);
+        return;
+    }
+    for(int i=c; i<A.size()  ;i++)
+    {
+        sub.push_back(A[i]);
+        sum+=A[i];
+        gen(A,B,res,sub,i+1,sum);
+        sum-=A[i];
+        sub.pop_back();
+    }
+    return;
+}
+vector<vector<int> > Solution::combinationSum(vector<int> &A, int B) {
+   vector< vector < int> > res;
+   vector<int> sub;
+   sort(A.begin() , A.end());
+   gen(A,B,res,sub , 0 , 0);
+   sort(res.begin() , res.end());
+      return res;
+}
