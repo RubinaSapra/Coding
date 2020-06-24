@@ -1,0 +1,34 @@
+int Solution::evalRPN(vector<string> &A) {
+    int res=0;
+    stack<string>s;
+    for(int i=0; i<A.size() ; i++)
+    {
+       if(A[i]=="+" || A[i]=="-" || A[i]=="*" || A[i]=="/" ) 
+       {
+           int c=2;
+           string a,b,x;
+           if(!s.empty())
+            {
+                a= s.top();
+                s.pop();
+            }
+                       if(!s.empty())
+            {
+                b= s.top();
+                s.pop();
+            }
+            if(A[i]=="+")
+            x=to_string(stoi(a)+stoi(b)) ;
+            if(A[i]=="-")
+             x=to_string(stoi(b)-stoi(a)) ;
+             if(A[i]=="*")
+              x=to_string(stoi(b)*stoi(a)) ;
+              if(A[i]=="/")
+               x=to_string((int)(stoi(b)/stoi(a)) ) ;
+               s.push(x);
+       }
+       else
+       s.push(A[i]);
+    }
+    return stoi(s.top()) ;
+}
