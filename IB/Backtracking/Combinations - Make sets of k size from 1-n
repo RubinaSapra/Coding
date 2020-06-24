@@ -1,0 +1,24 @@
+void gen( int c , int A , int B, vector< vector< int> > &res , vector<int> v )
+{
+    if(v.size() == B)
+    {
+        res.push_back(v);
+        return;
+    }
+    for(int i= c; i<=A ; i++)
+    {
+        v.push_back(i);
+        gen( i+1, A, B , res, v);
+        v.pop_back();
+    }
+    return ;
+}
+vector<vector<int> > Solution::combine(int A, int B) {
+    vector < vector< int> > res;
+   if(B==0)
+   return {{}};
+   if(A<B)
+   return res;
+   gen( 1, A, B , res, {});
+   return res;
+}
