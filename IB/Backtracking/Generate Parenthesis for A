@@ -1,0 +1,21 @@
+//For example, given n = 3, a solution set is: "((()))", "(()())", "(())()", "()(())", "()()()"
+
+void find(int A , vector < string>  &res , string s , int i , int j)
+{
+    if(i==A && j==A)
+    {
+        res.push_back(s);
+        return;
+    }
+    if(i<A)
+    find(A,res,s+'(' , i+1 , j);
+    if(j<i)
+    find(A,res,s+')' , i, j+1 );
+    return;
+}
+
+vector<string> Solution::generateParenthesis(int A) {
+    vector<string> res;
+    find(A, res, "" , 0 , 0 );
+    return res;
+}
