@@ -1,0 +1,33 @@
+map< char, string> mp;
+void find(string A , string s , vector<string> &res )
+{
+    if(s.length()  == A.length())
+    {
+        //cout<<x<<" "<< s<<" ";
+        res.push_back(s);
+        return;
+    }
+    for(char i : mp [ A[s.length() ] ] )
+     {
+         s+=i;
+         find(A, s, res);
+          s.pop_back();
+     }
+}
+
+vector<string> Solution::letterCombinations(string A) {
+    vector<string> res;
+    if(A=="" || A.size() ==0 ) return res;
+    mp['0']="0";
+     mp['1'] = "1";
+    mp['2'] ="abc" ;
+    mp['3']="def";
+    mp['4']="ghi";
+    mp['5']="jkl";
+    mp['6']="mno";
+    mp['7']="pqrs";
+    mp['8']="tuv";
+    mp['9']="wxyz";
+   find(A,"" , res);
+   return res;
+}
