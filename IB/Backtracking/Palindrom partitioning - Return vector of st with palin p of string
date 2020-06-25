@@ -1,0 +1,47 @@
+//Return all possible palindrome partitioning of s.
+
+For example, given s = "aab",
+Return
+
+  [
+    ["a","a","b"]
+    ["aa","b"],
+  ]
+
+
+bool pal(string s)
+{
+    for(int i=0;i<s.length()/2; i++)
+    {
+        if(s[i]!=s[s.length()-i-1])
+        return false;
+    }
+    return true;
+}
+void find(int index, vector<string> x , vector< vector < string> > &res,  string A)
+{
+    if(index ==A.length() ) 
+    {
+        res.push_back(x);
+        return;
+    }
+    string curr="";
+    for(int i=index ; i<A.length() ; i++)
+    {
+        curr+=A[i];
+        if(pal(curr))
+        {
+            x.push_back(curr);
+            find(i+1,x,res, A);
+            x.pop_back();
+        }
+    }
+    return ;
+}
+vector<vector<string> > Solution::partition(string A) {
+  vector< vector< string> > res;
+  vector<string> x;
+  find(0,x, res , A);
+  return res;
+}
+
