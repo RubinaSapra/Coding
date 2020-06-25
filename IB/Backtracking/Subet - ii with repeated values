@@ -1,0 +1,21 @@
+vector<vector<int>> res;
+void find(vector<int> &A, int index, vector<int> temp)
+{
+    if(index==A.size())
+    {
+        sort(temp.begin(), temp.end());
+       if( find(res.begin() , res.end() , temp ) == res.end() ) 
+       res.push_back(temp);
+        return;
+    }
+    find(A, index+1, temp);
+    temp.push_back(A[index]);
+    find(A, index+1, temp);
+}
+vector<vector<int> > Solution::subsetsWithDup(vector<int> &A) 
+{
+     res.clear();
+    find(A, 0, vector<int>());
+    sort(res.begin() , res.end() ) ; 
+    return res;
+}
