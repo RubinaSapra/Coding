@@ -1,0 +1,23 @@
+Input: [2, 7, 11, 15], target=9
+Output: index1 = 1, index2 = 2
+If multiple solutions exist, output the one where index2 is minimum.
+If there are multiple solutions with the minimum index2, choose the one with minimum index1 out of them.
+
+vector<int> Solution::twoSum(const vector<int> &A, int B) {
+    unordered_map<int, vector<int>> m;
+    for(int i=1; i<=A.size(); i++)
+    {
+        int num1 = A[i-1], num2 = B-A[i-1];
+        m[num1].push_back(i);
+            
+        if(!m[num2].empty())
+        {
+            if(m[num2].front() != i)
+                return vector<int>{m[num2].front(), i};
+            
+            else if(m[num2].front() == i && 2 <= m[num2].size())
+                return vector<int>{m[num2][1], i};
+        }
+    }
+    return vector<int>();
+}
