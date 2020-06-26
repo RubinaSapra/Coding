@@ -1,0 +1,47 @@
+bool checksafe(vector < vector < char> > &A, int n , int r , int c , char x)
+{
+    for(int i=0 ; i< n ; i++)
+    {
+        if(A[i][c]==x || A[r][i] ==x)
+        return false;
+    }
+    int box = sqrt(n);
+    int begr = r/box;
+    int begc =c/box;
+    int br = begr*box;
+    int bc = begc*box;
+    for(int i=br ; i<br+box ; i++)
+    {
+        for(int j=bc ; j<bc+box ; j++)
+        {
+            if(A[i][j] == x)
+            return false;
+        }
+    }
+    return true;
+}
+bool solve(vector< vector< char > > &A , int n , int r, int c)
+{
+    if(r==n)
+    return true;
+    if(c==n)
+    return solve(A,n,r+1,0);
+    if(A[r][c]!='.')
+    return solve(A,n,r,c+1);
+    for(int i=1; i<=n;i++)
+    {
+        if(checksafe( A , n, r,c,i+'0' ))
+        {
+          A[r][c] = '0'+i;
+             bool succ = (solve(A,n,r,c+1));
+             if(succ)
+             return true;
+            A[r][c] = '.';
+        }
+    }
+    return false;
+}
+void Solution::solveSudoku(vector<vector<char> > &A) {
+  bool ans = solve(A,A.size() , 0 ,0);
+}
+
