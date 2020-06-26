@@ -33,8 +33,7 @@ bool solve(vector< vector< char > > &A , int n , int r, int c)
         if(checksafe( A , n, r,c,i+'0' ))
         {
           A[r][c] = '0'+i;
-             bool succ = (solve(A,n,r,c+1));
-             if(succ)
+             if(solve(A,n,r,c+1))
              return true;
             A[r][c] = '.';
         }
