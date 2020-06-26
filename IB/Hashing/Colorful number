@@ -1,0 +1,39 @@
+//A number can be broken into different contiguous sub-subsequence parts. 
+Suppose, a number 3245 can be broken into parts like 3 2 4 5 32 24 45 324 245. 
+And this number is a COLORFUL number, since product of every digit of a contiguous subsequence is different
+N = 23
+2 3 23
+2 -> 2
+3 -> 3
+23 -> 6
+this number is a COLORFUL number since product of every digit of a sub-sequence are different. 
+
+Output : 1
+
+int Solution::colorful(int A) {
+    int a= A , n;
+    map<int, int>mp;
+    vector<int>v;
+    while(a)
+    {
+        v.push_back(a%10);
+        a/=10;
+    }
+    n=v.size();
+    for(int i=0 ; i< n ;i++)
+    {
+        int up = v[i];
+        if( mp[up] > 0)
+        return 0;
+        mp[up]++;
+        for(int j= i+1 ; j< n ; j++)
+        {
+            up*=v[j];
+            if(mp[up]>0 )
+            return 0 ;
+            mp[up]++;
+        }
+    }
+    return 1;
+    
+}
