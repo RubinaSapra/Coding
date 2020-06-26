@@ -1,0 +1,23 @@
+void solve( vector< vector < int> > &res, vector<int> tmp , int curr , int n , vector<int>&A)
+{
+    if(curr==n)
+    {
+        res.push_back(tmp);
+        return;
+    }
+    for(int i=0;i<n ; i++)
+    {
+        if(tmp[i] == -1)
+        {
+            tmp[i] = A[curr];
+            solve(res,tmp,curr+1,n,A);
+            tmp[i]= -1;
+        }
+    }
+}
+vector<vector<int> > Solution::permute(vector<int> &A) {
+vector < vector< int > > res;
+vector<int> tmp(A.size() , -1);
+solve(res,tmp , 0 , A.size() , A);
+return res;
+}
