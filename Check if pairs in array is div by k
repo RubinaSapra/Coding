@@ -1,0 +1,29 @@
+#eg = 0,1,2,3,4,5,6,7,8,9,10 k = 5 them 1,9 , 2,8 , 3,7 , 4,6, 5,5 , 10,0 so true
+class Solution {
+public:
+    bool canArrange(vector<int>& arr, int k) {
+        if(arr.size() %2 !=0)
+            return 0;
+    unordered_map<int, int> mp;
+        for(auto it : arr)
+          {
+            int  d = it%k;
+            if(d<0)
+                d= k+d;
+            mp[d]++;
+           }
+        for(auto it: arr)
+        {
+            int x = it%k < 0 ? k+it%k : it%k  ;
+            if(x==0 || x*2 ==k)
+            {
+                if(mp[x] & 1)
+                    return 0;
+            }
+            else if( mp[x] != mp[k-x])
+                return 0;
+          //  cout<< it<<" "<< mp[x] << " "<< mp[k-x]<<"\n";
+        }
+        return 1;
+    }
+};
