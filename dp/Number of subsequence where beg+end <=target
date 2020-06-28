@@ -1,0 +1,33 @@
+//Input: nums = [3,5,6,7], target = 9
+Output: 4
+Explanation: There are 4 subsequences that satisfy the condition.
+[3] -> Min value + max value <= target (3 + 3 <= 9)
+[3,5] -> (3 + 5 <= 9)
+[3,5,6] -> (3 + 6 <= 9)
+[3,6] -> (3 + 6 <= 9)
+
+class Solution {
+public:
+    int numSubseq(vector<int>& nums, int target) {
+               
+        int n = nums.size();
+        int MOD = 1000000007;        
+        vector<int>power(n, 1);
+        for (int i = 1; i < n; i++) 
+            power[i] = (power[i-1] * 2) % MOD;        
+        sort(nums.begin(), nums.end());
+        
+        int i = 0, j = n-1;
+        int res = 0;
+        
+        while (i <= j) {
+            if (nums[i] + nums[j] > target)
+                j--;
+            else
+                res = (res + power[j-i++]) % MOD;
+        }
+        
+        return res;
+ 
+    }
+};
