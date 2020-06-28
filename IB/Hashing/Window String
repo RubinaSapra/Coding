@@ -1,0 +1,27 @@
+Given a string S and a string T, find the minimum window in S which will contain all the characters in T in linear time complexity.
+Note that when the count of a character C in T is N, then the count of C in minimum window in S should be at least N.
+
+Example : S = "ADOBECODEBANC"  T = "ABC"  Minimum window is "BANC"
+string Solution::minWindow(string A, string B) {
+ map<int, int> m;
+  for (char c : B) 
+      m[c]++;
+int remaining = B.length();
+int left = 0, right = 0, minStart = 0, minLen = INT_MAX;
+
+while (right < A.length()){
+    if (--m[A[right++]] >= 0) 
+        remaining--;
+    
+    while (remaining == 0){
+        if (right - left < minLen){
+            minLen = right - left;
+            minStart = left;
+        }
+        if (++m[A[left++]] > 0) 
+            remaining++;
+    }
+}
+    
+return minLen < INT_MAX ? A.substr(minStart, minLen) : "";
+}
