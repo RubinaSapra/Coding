@@ -1,0 +1,15 @@
+int Solution::nchoc(int A, vector<int> &B) {
+    priority_queue<int> p;
+    int res=0;
+    int mod = 1000000007;
+    for( int a :  B )
+    p.push(a);
+    for(int i=0 ; i<A; i++)
+    {
+       int x= p.top();
+       res = ( res%mod +  x %mod  ) %mod ;
+       p.pop();
+       p.push( floor ( x/2));
+    }
+    return res;
+}
