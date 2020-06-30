@@ -1,93 +1,87 @@
-struct node{
-  node *arr[26];
-  bool isword;
-  node()
-  {
-        isword = false;
-      for(int i=0; i<26; i++) arr[i] = NULL;
-  }
+struct node
+{
+    bool isw ;
+    node* a[26];
+    node()
+    {
+        isw = false;
+        for(int i=0; i<26; i++)
+        a[i]=NULL;
+    }
 };
-
-struct trie{
-    node *root;
+struct trie
+{
+    node* root;
     trie()
     {
-        root = new node();
+        root= new node();
     }
-    
-    void insert(string s)
+    void insert( string s )
     {
-        node *temp = root;
-        for(char c : s)
+        node* tmp = root;
+        for( char c : s)
         {
-            if(temp->arr[c-'a'] == NULL)
-                temp->arr[c-'a'] = new node();
-            temp = temp->arr[c-'a'];
+            if(!tmp->a[c-'a'])
+            tmp->a[c-'a'] = new node();
+            tmp = tmp->a[c-'a'];
         }
-        temp->isword = true;
+        tmp->isw = true;
     }
-    
     bool search(string s)
     {
-        node *temp = root;
+        node* tmp = root;
         for(char c : s)
         {
-            if(temp->arr[c-'a'] == NULL)
-              return false;
-            temp = temp->arr[c-'a'];
+            if(!tmp->a[c-'a'])
+            return false;
+            tmp = tmp->a[c-'a'];
         }
-        return temp->isword;
+        return tmp->isw;
     }
 };
-
-bool cmp(pair<int,int> p1,pair<int,int> p2)
+bool cmp ( pair < int, int> &a , pair < int, int>&b)
 {
-    if(p1.second == p2.second)
-        return p1.first < p2.first;
-    return p1.second > p2.second;
+    if(a.second == b.second)
+    return a.first<b.first;
+    return a.second>b.second;
 }
-
-vector<int> Solution::solve(string a, vector<string> &b) {
-    a += '_';
-    string temp;
-    trie t;
-    // t.insert("bla");
-    for(char c : a)
+vector<int> Solution::solve(string A, vector<string> &B) {
+    string t = "";
+    trie tr;
+    A+='_';
+    for(char c : A)
     {
-        if(c == '_')
+        if(c=='_')
         {
-            t.insert(temp);
-            temp = "";
+            tr.insert(t);
+            t="";
         }
         else
-        {
-            temp += c;
-        }
+        t+=c;
     }
-    vector<pair<int,int>> vec;
-    int i=0;
-    for(string s : b)
-    {
-        temp = "";
-        s += "_";
-        int count = 0;
-        for(char c : s)
-        {
-            if(c == '_')
-            {
-                if(t.search(temp))
-                    count++;
-                temp = "";
-            }
-            else
-                temp += c;
-        }
-        vec.push_back({i,count} );
-        i++;
-    }
-    sort(vec.begin(),vec.end(),cmp);
-    vector<int> ans;
-    for(auto p : vec)
-        ans.push_back(p.first);
-    return ans;
+    vector < pair < int, int> > v;
+   for(int i=0; i<B.size() ; i++)
+   {
+       string s = B[i];
+       s+='_';
+       int p=0;
+        t="";
+       for(char c : s)
+       {
+           if(c=='_')
+           {
+               if(tr.search(t))
+               p++;
+               t="";
+           }
+           else
+           t+=c;
+       }
+      v.push_back({i, p }); 
+   }
+   sort(v.begin() , v.end() , cmp);
+   vector<int> res;
+   for(auto it : v)
+   res.push_back(it.first);
+   return res;
 }
