@@ -1,3 +1,35 @@
+//first
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ int ans;
+ void solve(TreeNode* a, int &k)
+ {
+     if(!a) return;
+     solve(a->left , k);
+     k--;
+     if(k==0)
+     ans = a->val;
+     solve(a->right, k);
+ }
+int Solution::kthsmallest(TreeNode* A, int B) {
+     solve(A , B);
+     return ans;
+}
+
+
+//sec
+
+
+
+
+
 class Solution {
 public:
     using VI = vector<int>;
