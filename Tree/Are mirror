@@ -1,5 +1,26 @@
 //first method
 
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ int areMirror(TreeNode* a , TreeNode* b)
+ {
+     if(!a && !b) return 1;
+     if( a &&b)
+     return (a->val == b->val && areMirror(a->left , b->right) && areMirror(a->right, b->left));
+     return 0;
+     
+ }
+int Solution::isSymmetric(TreeNode* A) {
+   return areMirror(A,A);
+}
+
 int areMirror(Node* a, Node* b)
 {
    if(!a && !b)
