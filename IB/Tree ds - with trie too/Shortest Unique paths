@@ -1,0 +1,59 @@
+//Input: [zebra, dog, duck, dove]
+Output: {z, dog, du, dov}
+where we can see that
+zebra = z
+dog = dog
+duck = du
+dove = dov
+struct node
+{
+    int v;
+    node* a[26];
+    node()
+    {
+        v= 0;
+        for(int i=0; i<26; i++)
+        a[i] = NULL;
+    }
+};
+struct trie
+{
+    node* root;
+    trie()
+    {
+        root= new node();
+    }
+    void insert( string s)
+    {
+     node* t= root;
+     for(char c : s)
+     {
+         if( !t->a[c-'a'])
+               t->a[c-'a'] = new node();
+               t->a[c-'a'] ->v++;
+        t= t->a[c-'a'];
+               
+     }
+    }
+    string up( string s)
+    {
+        node* t = root;
+        string x="";
+        for(char c : s)
+        {
+            x+=c;
+            if(t->a[c-'a']->v == 1) return x;
+            t= t->a[c-'a'];
+        }
+        return x;
+    }
+};
+vector<string> Solution::prefix(vector<string> &A) {
+    trie t;
+    for(string s : A)
+    t.insert(s);
+    vector<string> res;
+    for(string s : A)
+    res.push_back( t.up(s));
+    return res;
+}
