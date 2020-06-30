@@ -1,0 +1,26 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+TreeNode* check(vector<int>&B , int &x , unordered_map<int, int> &mp, int s, int e)
+ {
+     if(s> e) return NULL;
+     int curr = B[x--];
+     TreeNode* root = new TreeNode(curr);
+     if(s==e) return root;
+     root->right = check(B,x,mp, mp[curr]+1 , e);
+     root->left  = check(B,x,mp, s , mp[curr]-1);
+     return root;
+ }
+TreeNode* Solution::buildTree(vector<int> &A, vector<int> &B) {
+    unordered_map<int , int> mp;
+    for(int i=0; i<A.size() ; i++)
+    mp[A[i]] = i;
+    int x = A.size() - 1;
+    return check (B , x, mp , 0 ,x );
+}
