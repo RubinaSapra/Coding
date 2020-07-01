@@ -1,0 +1,5 @@
+int Solution::minDepth(TreeNode* root) {
+    if(!root) return INT_MAX;
+    if(!root->left && !root->right ) return 1;
+      return min(minDepth(root->left), minDepth(root->right))+1 ;
+}
