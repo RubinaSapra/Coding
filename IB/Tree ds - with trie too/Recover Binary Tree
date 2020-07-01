@@ -1,0 +1,42 @@
+//Two elements of a binary search tree (BST) are swapped by mistake.Tell us the 2 values swapping which the tree will be restored.
+Input : 
+         1
+        / \
+       2   3
+
+Output : 
+       [1, 2]
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ void inorder( TreeNode* node , TreeNode* &f, TreeNode* &s , TreeNode* &p)
+ {
+     if(!node ) return;
+     inorder(node->left  , f, s , p );
+     if(p)
+     {
+         if(p->val > node->val)
+         {
+             if(!f)
+             f=p;
+             s=node;
+         }
+     }
+     p=node;
+     inorder(node->right , f,s, p);
+ }
+vector<int> Solution::recoverTree(TreeNode* A) {
+    TreeNode* f= NULL ;
+    TreeNode* s = NULL;
+    TreeNode* p = NULL;
+      inorder(A , f,s, p );
+    vector<int> res{f->val, s->val};
+    sort(res.begin() , res.end());
+    return res;
+}
