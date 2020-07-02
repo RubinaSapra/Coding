@@ -1,0 +1,13 @@
+int Solution::bulbs(vector<int> &a)  {
+    int curron = 1;
+    int count = 0;
+    for(int i : a)
+    {
+        if(i != curron)
+        {
+            count++;
+            curron = i;
+        }
+    }
+    return count;
+}
