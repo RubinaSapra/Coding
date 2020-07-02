@@ -1,0 +1,43 @@
+A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without 
+disturbing the relative positions of the remaining characters. (ie, “ACE” is a subsequence of “ABCDE” while “AEC” is not).
+Input 1:
+    A = "abc"
+    B = "abc"
+    
+Output 1:
+    1
+
+Explanation 1:
+    Both the strings are equal.
+
+Input 2:
+    A = "rabbbit" 
+    B = "rabbit"
+
+Output 2:
+    3
+
+Explanation 2:
+    These are the possible removals of characters:
+        => A = "ra_bbit" 
+        => A = "rab_bit" 
+        => A = "rabb_it"
+ int Solution::numDistinct(string A, string B) {
+    int n=A.length();
+int m=B.length();
+int dp[m+1][n+1];
+memset( dp , 0 ,sizeof(dp));
+for(int i=0;i<=n;i++)
+dp[0][i]=1;
+for(int i=1;i<=m;i++)
+{
+for(int j=1;j<=n;j++)
+{
+if(B[i-1]==A[j-1])
+dp[i][j]=dp[i-1][j-1]+dp[i][j-1];
+else
+dp[i][j]=dp[i][j-1];
+}
+}
+return dp[m][n];
+}
