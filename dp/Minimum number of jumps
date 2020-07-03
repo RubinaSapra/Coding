@@ -1,0 +1,22 @@
+int Solution::jump(vector<int> &nums ) {
+  int n = nums.size();
+	if(n <=1)
+		return 0;
+	int ans = 0, index = 0;
+	while(index < n){
+		int maxVal = 0, next = 0;
+		if(index + nums[index] >= n-1)
+			return ans+1;
+		for(int i=1; i<= nums[index]; i++){
+				if(nums[index + i] + (i-1) >= maxVal){
+				maxVal = nums[index+i] + (i-1);
+				next = index+i;
+			}
+		}
+		if(index == next)
+			return -1;
+		index = next;
+		ans++;
+	}
+	return ans;
+}
