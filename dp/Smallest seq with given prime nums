@@ -1,0 +1,19 @@
+A = 2 B = 3  C = 5  D = 5  Example Output:  [2, 3, 4, 5, 6]
+
+vector<int> Solution::solve(int A, int B, int C, int D) {
+    set<int>s;
+    s.insert(A) ; 
+    s.insert(B);
+    s.insert(C);
+    vector<int> res;
+    while(res.size() < D)
+    {
+        int x= *(s.begin());
+        s.erase(s.begin() );
+        res.push_back(x);
+       s.insert(x*A);
+         s.insert(x*B);
+            s.insert(x*C);
+    }
+    return res;
+}
