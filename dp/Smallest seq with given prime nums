@@ -9,7 +9,7 @@ vector<int> Solution::solve(int A, int B, int C, int D) {
     while(res.size() < D)
     {
         int x= *(s.begin());
-        s.erase(s.begin() );
+        s.erase(x);
         res.push_back(x);
        s.insert(x*A);
          s.insert(x*B);
