@@ -1,0 +1,17 @@
+int Solution::chordCnt(int A) {
+    int  n = 2*A;
+   long long int arr[n+1];
+    arr[0] = 1;
+    int modu = pow(10,9)+7;
+    for(int i=1;i<=n;i++)
+    {
+        arr[i]  = 0;
+        if(i%2 == 0)
+        {
+            for(int j=0;j<=i-2;j++) 
+            
+    arr[i]= ((arr[i]%modu) + (((arr[j]%modu)*(arr[i-2-j]%modu))%modu))%modu;
+        }
+    }
+    return arr[n];
+}
