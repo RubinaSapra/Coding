@@ -1,0 +1,22 @@
+So your task is, find the largest sum of strength that you can erase by bombing one sub-matrix in the grid.
+Input:
+3 3
+-5 -4 -1
+-3 2 4
+2 5 8
+
+Output:
+19
+
+Explanation:
+Bomb the sub-matrix from (2,2) to (3,3): 2 + 4 + 5 + 8 = 19
+
+int Solution::solve(vector<vector<int> > &A) {
+  int m = A.size(),n = A[0].size(),ans=INT_MIN; 
+	vector<vector<int>> dp(m+1,vector<int> (n+1,0));
+	for(int i=m-1;i>=0;i--){ 
+		for(int j=n-1;j>=0;j--){ 
+		        dp[i][j]= A[i][j]+ dp[i+1][j] + dp[i][j+1] - dp[i+1][j+1]; // ans will be the submatrix having largest sum
+			ans = max(ans,dp[i][j]);}}
+	return ans;
+}
