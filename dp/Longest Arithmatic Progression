@@ -1,0 +1,22 @@
+typedef map<int,int> mp;
+
+
+class Solution {
+public:
+    int longestArithSeqLength(vector<int>& A) {
+ int i,j,n = A.size(),mcount=0;
+vector<mp> arr(n);
+for(i=1;i<n;i++)
+{
+    for(j=0;j<i;j++)
+    {
+        int a = A[i] - A[j];
+        arr[i][a] = arr[j][a] + 1;
+        mcount = max(mcount,arr[i][a]);
+    }
+}
+return mcount+1;
+
+        
+    }
+};
