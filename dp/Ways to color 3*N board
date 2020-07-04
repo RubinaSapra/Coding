@@ -1,0 +1,16 @@
+int Solution::solve(int A) {
+     long int a= 24; 
+    long int b = 12; 
+    long int t= 0; 
+      
+    for (int i = 2; i <= A; i++)  
+    { 
+        t = a; 
+        a= (11 * a + 10 * b ) % 1000000007; 
+        b= ( 5 * t + 7 * b ) % 1000000007; 
+    } 
+      
+    long num = (a+b) % 1000000007; 
+                         
+    return (int)num; 
+}
