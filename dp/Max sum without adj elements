@@ -1,0 +1,10 @@
+int Solution::adjacent(vector<vector<int> > &A) {
+    int n = A[0].size() ;
+    int dp[A[0].size()+1] = {0};
+for(int i = A[0].size()-1;i>=0;i--)
+{ int n1 = 0,n2 = 0;
+if(i+2<n)n1 = dp[i+2];
+if(i+3<n)n2 = dp[i+3];
+dp[i] = max(n1,n2) + max(A[0][i],A[1][i]); }
+return max(dp[0],dp[1]); 
+}
