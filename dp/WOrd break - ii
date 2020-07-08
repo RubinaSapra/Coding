@@ -1,0 +1,63 @@
+//IB
+vector<string> Solution::wordBreak(string str, vector<string> &v) {
+    int n = v.size(),i,j;
+int size = str.size();
+vector<string> temp;
+if(size==0 || n==0)
+    return temp;
+string s;
+vector<vector<string> > ans(size);
+for(i=0;i<size;i++){
+    for(j=i;j>=0;j--){
+        s = str.substr(j,i-j+1);
+        if(find(v.begin(),v.end(),s)!=v.end()){
+            if(j-1>=0){
+                for(int k = 0;k<ans[j-1].size();k++){
+                    ans[i].push_back(ans[j-1][k]+" "+s);
+                }
+            }
+            else{
+                ans[i].push_back(s);
+            }
+        }
+    }
+}
+sort(ans[size-1].begin(),ans[size-1].end());
+if(ans[size-1].size())
+    return ans[size-1];
+return temp;
+    
+}
+//lt
+class Solution {
+public:
+    unordered_map<string, vector<string>> cache;
+    vector<string> solve(string s, unordered_set<string>& words){
+        int n = s.size();
+        vector<string> res;
+        if(n==0) return vector<string>{""};
+        
+        if(cache.find(s) != cache.end()) return cache[s];
+        
+        string curr = "";
+        for(int i=0;i<n;i++){
+            curr += s[i];
+            if(words.find(curr) != words.end()){
+                vector<string> x;
+                x = solve(s.substr(i+1), words);
+                if(x.size()){
+                    for(auto y: x){
+                        string temp = curr;
+                        if(y.size()) temp += " " + y;
+                        res.push_back(temp);
+                    }
+                }
+            }
+        }
+        return cache[s] = res;
+    }
+    vector<string> wordBreak(string s, vector<string>& w) {
+        unordered_set<string> words(w.begin(),w.end());
+        return solve(s,words);
+    }
+};
