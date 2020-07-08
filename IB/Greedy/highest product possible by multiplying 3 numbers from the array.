@@ -1,0 +1,27 @@
+int Solution::maxp3(vector<int> &A) {
+    int mxa=INT_MIN , mxb=INT_MIN , mxc=INT_MIN, mna= INT_MAX, mnb = INT_MAX;
+    for(int i=0 ; i<A.size() ; i++)
+    {
+        if(A[i]>mxa)
+        {
+            mxc= mxb;
+            mxb=mxa;
+            mxa=A[i];
+        }
+        else if(A[i]>mxb)
+        {
+            mxc = mxb;
+            mxb = A[i];
+        }
+        else if(A[i]>mxc)
+        mxc= A[i];
+        if(A[i]<mna)
+        {
+            mnb = mna;
+            mna = A[i];
+        }
+        else if(A[i]<mnb)
+        mnb = A[i];
+    }
+    return max( mxa* mxb* mxc  , mna * mnb* mxa);
+}
