@@ -1,0 +1,19 @@
+int Solution::majorityElement(const vector<int> &A) {
+    int res= A[0];
+    int c=1;
+    for(int i=1 ; i<A.size()  ;i++)
+    {
+        if(A[i] == res)
+        c++;
+        else
+        {
+            c--;
+            if(c==0)
+            {
+                res = A[i];
+                c=1;
+            }
+        }
+    }
+    return res;
+}
