@@ -1,0 +1,39 @@
+Input 1:
+    A = "myinterviewtrainer",
+    B = ["trainer", "my", "interview"]
+
+Output 1:
+    1
+
+Explanation 1:
+    Return 1 ( corresponding to true ) because "myinterviewtrainer" can be segmented as "my interview trainer".
+    
+Input 2:
+    A = "a"
+    B = ["aaa"]
+
+Output 2:
+    0
+
+int Solution::wordBreak(string a, vector<string> &b) {
+    if(b.empty()) return 0;
+    unordered_set<string> s;
+    for(string str : b) s.insert(str);
+    vector<bool> dp(a.size()+1,0);//dp[i] is true if a valid sequence ends there.
+    dp[0] = 1;
+    for(int i=1; i<=a.size(); i++)
+    {
+        for(int j=i-1; j>=0; j--)
+        {
+            if(dp[j])
+            {
+                if(s.find(a.substr(j,i-j)) != s.end())
+                {
+                    dp[i] = 1;
+                    break;
+                }
+            }
+        }
+    }
+    return dp[a.size()];
+}
