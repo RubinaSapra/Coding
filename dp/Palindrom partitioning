@@ -1,0 +1,42 @@
+//minimum cuts needed for a palindrome partitioning of A.
+A = "aba"
+
+Output 1:
+    0
+
+Explanation 1:
+    "aba" is already a palindrome, so no cuts are needed.
+
+Input 2:
+    A = "aab"
+    
+Output 2:
+    1
+bool pal(string s)
+{
+    int n = s.length();
+    for(int i = 0; i< n ; i++)
+    {
+        if(s[i]!=s[n-i-1])
+        return 0;
+    }
+    return 1;
+}
+int Solution::minCut(string A) {
+    int n = A.size();
+    vector<int> dp(n , INT_MAX);
+    for(int i=0 ; i< n ;i++)
+    {
+        if(pal(A.substr(0,i+1)))
+        dp[i] = 0;
+        else
+        {
+            for(int j = 0; j< i ; j++)
+                {
+                    if(pal(A.substr(j+1 , i-j)))
+                    dp[i] = min( dp[i] , 1+ dp[j]);
+                }
+        }
+    }
+    return dp[n-1];
+}
