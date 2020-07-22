@@ -1,0 +1,48 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+
+class Codec {
+public:
+    queue<string>q;
+
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        if(!root) return"X#";
+        string res=to_string(root->val)+"#"+ serialize(root->left) + serialize(root->right);
+        return res;
+    }
+
+    TreeNode* d(queue <string> &q)
+    {
+        if(q.size() == 0 ) return NULL;
+        if(q.front() == "X") 
+        {
+            q.pop();
+            return NULL;
+        }
+        TreeNode* r = new TreeNode(stoi(q.front()));
+        q.pop();
+        r->left = d(q);
+        r->right = d(q);
+        return r;
+    }
+    TreeNode* deserialize(string data) {
+        stringstream s(data);
+        string t;
+        while(std::getline(s, t , '#' ) )
+            q.push(t);
+        return d(q);
+            
+    }
+};
+
+// Your Codec object will be instantiated and called as such:
+// Codec codec;
+// codec.deserialize(codec.serialize(root));
