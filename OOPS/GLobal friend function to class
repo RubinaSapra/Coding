@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+class B
+{
+	private : int x;
+	public : B()
+	{
+		x = 25;
+	}
+	friend void showb( B &b);
+};
+void showb(B &b)
+{
+	cout<<b.x<<" ";
+}
+int main()
+{
+	B bb;
+	showb(bb);
+	
+}
