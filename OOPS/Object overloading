@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+class cc
+{
+	private : int r , i;
+	public: cc( int a=0 , int b=0)
+	{
+		r= a;
+		i = b;
+	}
+	cc operator+ (cc &c)
+    {
+    	cc res;
+    	res.r = r+ c.r;
+    	res.i = i+ c.i;
+    	return res;
+	}
+	void print()
+	{
+		cout<<r<<" "<<i;
+	}
+};
+int main()
+{
+	cc c1(1,2),c2(2,3);
+	cc c3 = c1+c2;
+	c3.print();
+}
