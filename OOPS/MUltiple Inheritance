@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+class A
+{
+	public: A()
+	{
+		cout<<"A\n";
+	}
+};
+class B
+{
+	public: B()
+    {
+    	cout<<"B\n";
+	}
+};
+class C: public A ,private B
+{
+	public: C()
+	{
+		cout<<"C\n";
+	}
+};
+int main()
+{
+	C ob;
+}
