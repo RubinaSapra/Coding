@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+class A
+{
+	public : int x;
+	A()
+	{
+		x= 15;
+	}
+	friend class B;
+};
+class B
+{
+	public : void printa(A &a)
+	{
+	  cout<<a.x<<" \n";	
+	}
+};
+int main()
+{
+	A a;
+	B b;
+	b.printa(a);
+}
