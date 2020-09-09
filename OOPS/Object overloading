@@ -26,3 +26,34 @@ int main()
 	cc c3 = c1+c2;
 	c3.print();
 }
+
+
+#include<bits/stdc++.h>
+using namespace std;
+class cc
+{
+	private : int r , i;
+	public: cc( int a=0 , int b=0)
+	{
+		r= a;
+		i = b;
+	}
+    friend cc operator+(cc &c , cc &d);
+	void print()
+	{
+		cout<<r<<" "<<i;
+	}
+};
+	cc operator+ (cc &c, cc &d)
+    {
+    	cc res;
+    	res.r = d.r+ c.r;
+    	res.i = d.i+ c.i;
+    	return res;
+	}
+int main()
+{
+	cc c1(1,2),c2(2,3);
+	cc c3 = c1+c2;
+	c3.print();
+}
