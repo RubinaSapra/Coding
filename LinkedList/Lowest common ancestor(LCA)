@@ -1,0 +1,10 @@
+Node* LCA(Node *root, int p, int q)
+{
+  if(!root || root->data == p || root->data == q) return root;
+       Node* l = LCA(root->left , p , q);
+       Node* r = LCA(root->right , p , q);
+        if(l && r) return root;
+        if(!l) return r;
+        if(!r) return l;
+        return NULL;
+}
