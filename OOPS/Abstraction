@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+class A
+{
+	virtual void display()=0;
+	void test()
+	{
+		cout<<"In A\n";
+	}
+};
+class B
+{
+	public: void display()
+	{
+		cout<<" Display in B\n";
+	}
+	public: void test()
+	{
+		cout<<"In B \n";
+	}
+};
+int main()
+{
+	B ob;
+	ob.display();
+	ob.test();
+}
