@@ -2,13 +2,14 @@
 using namespace std;
 class A
 {
+	public:
 	virtual void display()=0;
 	void test()
 	{
 		cout<<"In A\n";
 	}
 };
-class B
+class B : public A
 {
 	public: void display()
 	{
