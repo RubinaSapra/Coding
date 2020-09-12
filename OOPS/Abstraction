@@ -26,3 +26,35 @@ int main()
 	ob.display();
 	ob.test();
 }
+
+
+#include<bits/stdc++.h>
+using namespace std;
+class A
+{
+	public: virtual void display()
+	{
+		cout<<" display in A\n";
+	}
+	public: void test()
+	{
+		cout<<"In A\n";
+	}
+};
+class B : public A
+{
+	public: void display()
+	{
+		cout<<" Display in B\n";
+	}
+	public: void test()
+	{
+		cout<<"In B \n";
+	}
+};
+int main()
+{
+	A* ob = new B();
+	ob->display();
+	ob->test();
+}
