@@ -1,0 +1,138 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#include<stdio.h>
+#include<stdlib.h>
+using namespace std;
+struct n{
+    int x;
+    struct n *l,*r;
+};
+struct n *newn(int v){
+    struct n *node = (struct n *)malloc(sizeof(struct n));
+    node->x = v;
+    node->l=node->r=NULL;
+    return node;
+}
+
+void inorder(struct n *root){
+    if(root != NULL)
+    {
+    inorder(root->l);
+   printf("%d \n", root->x);
+    inorder(root->r);
+    }
+}
+void search(n* root, int k)
+{
+    int f=0;
+    while(root!=NULL){
+        if(k>root->x)
+            return search(root->r,k);
+        else if(k<root->x)
+            return search(root->l,k);
+            else
+                {f++; break;}
+    }
+    if(f==0)
+        cout<<"Value not found \n";
+    else
+        cout<<"Value found \n";
+
+}
+struct n* minv(n* node){
+n* c= node;
+while(c && c->l!=NULL)
+    c= c->l;
+return c;
+};
+struct n* deleten(n* root,int k)
+{
+    if(root==NULL)
+       cout<<"Empty\n";
+    if(k>root->x)
+       root->r= deleten(root->r,k);
+        else if(k<root->x)
+            root->l=deleten(root->l,k);
+            else
+                {
+                if(root->l==NULL)
+                {
+                    n* t= root->r;
+                    free(root);
+                    return t;
+                }
+                else if(root->r==NULL)
+                {
+                     n* t= root->l;
+                    free(root);
+                    return t;
+                }
+                struct n* t= minv(root->r);
+                root->x=t->x;
+                root->r=deleten(root->r,t->x);
+                }
+                return root;
+
+}
+int countn(n* root){
+int c=1;
+if(root==NULL)
+    return 0;
+    else{
+        c+=countn(root->r);
+        c+=countn(root->l);
+         return c;
+    }
+}
+ struct n* insert(struct n* node, int k)
+{
+    if(node == NULL)        return newn(k);
+        if(k < node->x)
+            node->l=insert(node->l,k);
+        else if( k > node->x)
+            node->r=insert(node->r,k);
+
+        else
+        return node;
+}
+int heightn(n* root){
+if(root==NULL)
+    return -1;
+int l=heightn(root->l);
+int r=heightn(root->r);
+if(l>r)
+    return l+1;
+else
+    return r+1;
+}
+bool checkbst(n* root,n* r,n* l){
+if(root==NULL)
+    return true;
+if(l!=NULL && root->x <= l->x)
+     return false;
+if(r!=NULL && root->x >= r->x)
+     return false;
+return (checkbst(root->l,l,root) and checkbst(root->r,root,r));
+
+   }
+int main()
+{
+    struct n *root=NULL;
+    int v[]={6,9,2,0,3};
+    root=insert(root,v[0]);
+    for(int i=1;i<5;i++)
+        {             insert(root,v[i]);
+            }
+
+    inorder(root);
+    search(root,3);
+    deleten(root,3);
+    inorder(root);
+    cout<<"Count = "<<countn(root)<<endl;
+    cout<<"Height = "<<heightn(root)<<endl;
+    if(checkbst(root,NULL,NULL))
+        cout<<"Is a bst \n"<<endl;
+    else
+           cout<<"Is a bst \n"<<endl;
+    return 0;
+}
