@@ -1,0 +1,99 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node
+{
+	int data;
+	node* left ;
+	node* right;
+};
+struct node* newnode( int val )
+{
+	node* tmp = (struct node* )malloc(sizeof(node*) ) ;
+	tmp->data = val ;
+	tmp->left = tmp->right = NULL;
+	return tmp;
+}
+struct node* insertnodebst( node* root, int v )
+{
+ if(!root)
+  return newnode(v);
+  if(v < root->data)
+  root->left = insertnodebst(root->left , v);
+  else if(v> root->data )
+  root->right = insertnodebst(root->right , v );
+  else
+  return root;
+}
+bool path( node* root , vector<int>&a, int x)
+{
+	if(!root)
+	return false; 
+	a.push_back(root->data);
+	if(root-> data == x)
+		return true ;
+	if( path(root->left , a, x) || path(root->right, a, x)  ) 
+	return true;
+	a.pop_back();
+	return false;
+	
+}
+void calc( node* root) 
+{
+	vector<int> a, b;
+	path(root , a, 3) ; 
+	path( root, b, 8);
+	int  i = 0 , j = 0 , x ; 
+	while(i<a.size() && j<b.size() ) 
+	{
+		if(i==j && a[i] == b[j])
+		{
+			i++;
+			j++;
+		}
+		else
+		{
+			x = j-1;
+			break;
+		}
+	}
+	for(int i = a.size()-1; i>x; i--)
+	cout<<a[i]<<" ";
+	for(int i = x; i< b.size() ; i++)
+	cout<<b[i]<<" ";
+	
+ } 
+int sumtree(node* root)
+{
+	if(!root) 
+	return 0;
+	int x= root->data;
+	root->data  = sumtree(root->left ) + sumtree(root->right);
+	return root->data +  x; 
+}
+void  inorder(node* root)
+{
+	if(root)
+	{
+	inorder(root->left );
+	cout<<root->data<<" ";
+	inorder(root->right);
+}
+}
+int main()
+{
+	struct node* root = NULL ; 
+	root= insertnodebst(  root, 3 );
+insertnodebst(  root, 2 );
+insertnodebst(  root, 4 );
+ insertnodebst(  root, 5 );
+
+ insertnodebst(  root, 1);
+	 insertnodebst(  root, 8 );
+		
+	inorder(root);
+	cout<<"\n";
+//	cout<< sumtree(root);
+//	inorder(root);
+calc(root);
+	
+}
